@@ -199,7 +199,7 @@ func main() {
 	})
 
 	// Create a file to write the generated HTML
-	file, err := os.Create("blog.html")
+	file, err := os.Create("index.html")
 	if err != nil {
 		panic(err)
 	}
