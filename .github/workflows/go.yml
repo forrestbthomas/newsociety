@@ -5,7 +5,7 @@ name: Go
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
 
@@ -27,8 +27,12 @@ jobs:
 
     - name: Commit index.html
       run: |
-        git config --global user.name 'Forrest Thomas'
+        git config --global user.name 'github action'
         git config --global user.email 'forrestbthomas@users.noreply.github.com'
-        git commit -am "create index.html"
+        git stash
+        git checkout -b release-$(date '+%Y-%m-%d')
+        git stash pop
+        git add .
+        git commit -m "create index.html"
         git push
           
