@@ -21,16 +21,19 @@ jobs:
         go-version: '1.21'
         
     - name: Gen Blog
-      run: go run cmd/main.go
+      run: |
+        go run cmd/main.go
+        ls
       env:
         BLOG_OPENAI_KEY: ${{ secrets.BLOG_OPENAI_KEY }}
 
     - name: Commit index.html
       run: |
+        ls
         git config --global user.name 'github action'
         git config --global user.email 'forrestbthomas@users.noreply.github.com'
         git stash
-        git checkout -b release-$(date '+%Y-%m-%d')
+        git checkout -b release-$(date +%s)
         git stash pop
         git add .
         git commit -m "create index.html"
