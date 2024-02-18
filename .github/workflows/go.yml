@@ -21,6 +21,8 @@ jobs:
         
     - name: Gen Blog
       run: go run cmd/main.go
+      env:
+        BLOG_OPENAI_KEY: ${{ secrets.BLOG_OPENAI_KEY }}
 
     - name: Commit index.html
       run: |
