@@ -97,7 +97,7 @@ func init() {
 }
 
 func getOpenAIKey() string {
-	key, ok := os.LookupEnv("OPENAI_AICLASSICS_API_KEY2")
+	key, ok := os.LookupEnv("BLOG_OPENAI_KEY")
 	if !ok {
 		return ""
 	}
