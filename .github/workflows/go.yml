@@ -1,0 +1,34 @@
+name: Go
+
+on: manual
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        
+    - name: Gen Blog
+      run: |
+        go run cmd/main.go
+        ls
+      env:
+        BLOG_OPENAI_KEY: ${{ secrets.BLOG_OPENAI_KEY }}
+
+    - name: Commit index.html
+      run: |
+        ls
+        git config --global user.name 'github action'
+        git config --global user.email 'forrestbthomas@users.noreply.github.com'
+        git add index.html
+        git add content/
+        git commit -m "create index.html"
+        git push
+          
