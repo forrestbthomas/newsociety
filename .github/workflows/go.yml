@@ -4,13 +4,12 @@
 name: Go
 
 on:
-  pull_request:
-    types: [opened,reopened]
+  push:
+    branches: [main]
 
 jobs:
 
   build:
-    if: ${{ ! startsWith(github.ref, 'main') }}
     runs-on: ubuntu-latest
     environment: github-pages
     steps:
@@ -28,12 +27,12 @@ jobs:
 
     - name: Commit index.html
       run: |
-        git config --global user.name 'Forrest Thomas'
+        git config --global user.name 'github action'
         git config --global user.email 'forrestbthomas@users.noreply.github.com'
         git stash
-        git checkout main
+        git checkout -b release-$(date '+%Y-%m-%d')
         git stash pop
         git add .
-        git commit am "create index.html"
+        git commit -m "create index.html"
         git push
           
