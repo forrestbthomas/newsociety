@@ -18,17 +18,17 @@ jobs:
     - name: Gen Blog
       run: |
         go run cmd/main.go
-        ls
       env:
         BLOG_OPENAI_KEY: ${{ secrets.BLOG_OPENAI_KEY }}
 
     - name: Commit index.html
       run: |
-        ls
         git config --global user.name 'github action'
         git config --global user.email 'forrestbthomas@users.noreply.github.com'
         git add index.html
         git add content/
         git commit -m "create index.html"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
