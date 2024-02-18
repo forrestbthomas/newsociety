@@ -4,12 +4,13 @@
 name: Go
 
 on:
-  push:
-    branches: [ "main" ]
+  pull_request:
+    types: [opened,reopened]
 
 jobs:
 
   build:
+    if: ${{ ! startsWith(github.ref, 'main') }}
     runs-on: ubuntu-latest
     environment: github-pages
     steps:
